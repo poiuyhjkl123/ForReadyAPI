@@ -9,7 +9,7 @@
     <con:config>
       <script>testRunner.testCase.setPropertyValue("x", 'b')
 
-log.info('Just after setting x to b '+context.expand( '${#TestCase#x}' ))</script>
+log.info('Hello')</script>
     </con:config>
   </con:testStep>
   <con:testStep type="groovy" name="Groovy Script 2" id="1647c5ce-2fdd-4577-99c8-a976fc31721c">
@@ -18,7 +18,7 @@ log.info('Just after setting x to b '+context.expand( '${#TestCase#x}' ))</scrip
       <script>log.info('In another grroovy script '+context.expand('${#TestCase#x}' ))</script>
     </con:config>
   </con:testStep>
-  <con:setupScript></con:setupScript>
+  <con:setupScript/>
   <con:properties>
     <con:property>
       <con:name>x</con:name>
