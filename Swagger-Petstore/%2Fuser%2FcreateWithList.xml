@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource name="/user/createWithList" path="/user/createWithList" id="a885476c-423c-4d01-91f1-558352179b20" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="a885476c-423c-4d01-91f1-558352179b20fileName">%2Fuser%2FcreateWithList</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="createUsersWithListInput" id="8de1463a-682b-43f2-8567-7c1309883968" method="POST">
+    <con:description>Creates list of users with given input array</con:description>
+    <con:settings/>
+    <con:parameters/>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/xml</con:mediaType>
+      <con:status/>
+      <con:params/>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/json</con:mediaType>
+      <con:status/>
+      <con:params/>
+    </con:representation>
+    <con:request name="Request 1" id="37e091d3-3653-4104-87c1-605de2bd2568" mediaType="application/json">
+      <con:settings/>
+      <con:endpoint>http://petstore.swagger.io</con:endpoint>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:parameters/>
+    </con:request>
+  </con:method>
+</con:resource>

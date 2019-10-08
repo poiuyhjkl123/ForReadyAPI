@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource name="/store/order" path="/store/order" id="6b943539-8000-4520-87d8-f02f16017666" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="6b943539-8000-4520-87d8-f02f16017666fileName">%2Fstore%2Forder</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="placeOrder" id="a97a741e-1fad-4470-a0ea-e67a7bc598e6" method="POST">
+    <con:description>Place an order for a pet</con:description>
+    <con:settings/>
+    <con:parameters/>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/xml</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:sampleContent><![CDATA[<Order>
+   <id>0</id>
+   <petId>0</petId>
+   <quantity>0</quantity>
+   <shipDate>2015-07-20T15:49:04-07:00</shipDate>
+   <status>placed</status>
+   <complete>false</complete>
+</Order>]]></con:sampleContent>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/json</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:sampleContent>{
+  "id" : 0,
+  "petId" : 0,
+  "quantity" : 0,
+  "shipDate" : "2015-07-20T15:49:04-07:00",
+  "status" : "placed",
+  "complete" : false
+}</con:sampleContent>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/xml</con:mediaType>
+      <con:status>400</con:status>
+      <con:params/>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/json</con:mediaType>
+      <con:status>400</con:status>
+      <con:params/>
+    </con:representation>
+    <con:request name="Request 1" id="39717ad4-c4ee-47db-8cd4-4e86fee0d190" mediaType="application/json">
+      <con:settings/>
+      <con:endpoint>http://petstore.swagger.io</con:endpoint>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:parameters/>
+    </con:request>
+  </con:method>
+</con:resource>

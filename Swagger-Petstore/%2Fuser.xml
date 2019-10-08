@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource name="/user" path="/user" id="665ec36f-8d48-4deb-9e21-8ce2cd8ea93e" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="665ec36f-8d48-4deb-9e21-8ce2cd8ea93efileName">%2Fuser</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="createUser" id="6265244b-31c9-4692-ab5d-1a8739f9dd70" method="POST">
+    <con:description>This can only be done by the logged in user.
+Create user</con:description>
+    <con:settings/>
+    <con:parameters/>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/xml</con:mediaType>
+      <con:status/>
+      <con:params/>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/json</con:mediaType>
+      <con:status/>
+      <con:params/>
+    </con:representation>
+    <con:request name="Request 1" id="1e6bc389-3697-459d-8c95-fc5dbf24e436" mediaType="application/json">
+      <con:settings/>
+      <con:endpoint>http://petstore.swagger.io</con:endpoint>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:parameters/>
+    </con:request>
+  </con:method>
+</con:resource>

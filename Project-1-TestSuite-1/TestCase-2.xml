@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="6f29f4c7-650a-49cd-b582-5d3b0a32ca01" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="TestCase 2" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="6f29f4c7-650a-49cd-b582-5d3b0a32ca01fileName">TestCase-2</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:testStep type="calltestcase" name="Run TestCase" id="109c688f-be6a-4951-bc3e-e11e74be909c">
+    <con:settings/>
+    <con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:targetTestCase>23da8021-1998-4d60-a2e8-4acb536ff75d</con:targetTestCase>
+      <con:properties>
+        <con:property>
+          <con:name>x</con:name>
+          <con:value>b</con:value>
+        </con:property>
+      </con:properties>
+      <con:returnProperties>
+        <con:entry>x</con:entry>
+      </con:returnProperties>
+      <con:runMode>PARALLELL</con:runMode>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Groovy Script" id="8b4bcb2a-bc08-4ba6-a7bd-f4cedd6610fe">
+    <con:settings/>
+    <con:config>
+      <script>testRunner.</script>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+</con:testCase>
