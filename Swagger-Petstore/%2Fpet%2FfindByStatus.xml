@@ -78,7 +78,7 @@ Finds Pets by status</con:description>
         <con:authType>No Authorization</con:authType>
       </con:credentials>
       <con:parameters>
-        <entry key="status" value="" xmlns="http://eviware.com/soapui/config"/>
+        <con:entry key="status" value=""/>
       </con:parameters>
     </con:request>
   </con:method>

@@ -78,7 +78,7 @@ Finds Pets by tags</con:description>
         <con:authType>No Authorization</con:authType>
       </con:credentials>
       <con:parameters>
-        <entry key="tags" value="" xmlns="http://eviware.com/soapui/config"/>
+        <con:entry key="tags" value=""/>
       </con:parameters>
     </con:request>
   </con:method>

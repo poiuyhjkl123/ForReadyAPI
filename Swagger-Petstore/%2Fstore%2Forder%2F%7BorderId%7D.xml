@@ -71,7 +71,7 @@ Find purchase order by ID</con:description>
         <con:authType>No Authorization</con:authType>
       </con:credentials>
       <con:parameters>
-        <entry key="orderId" value="" xmlns="http://eviware.com/soapui/config"/>
+        <con:entry key="orderId" value=""/>
       </con:parameters>
     </con:request>
   </con:method>
@@ -108,7 +108,7 @@ Delete purchase order by ID</con:description>
         <con:authType>No Authorization</con:authType>
       </con:credentials>
       <con:parameters>
-        <entry key="orderId" value="" xmlns="http://eviware.com/soapui/config"/>
+        <con:entry key="orderId" value=""/>
       </con:parameters>
     </con:request>
   </con:method>

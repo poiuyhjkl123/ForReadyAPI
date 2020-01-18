@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="0876b48c-d440-44fe-baee-a839179a9230" created="2.8.2" activeEnvironment="Default environment" name="Project 1" resourceRoot="" savePropertyValues="true" updated="2.8.2-m-SNAPSHOT" encryptionMode="Not encrypted" compositeProjectFormat="1.3" xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project id="0876b48c-d440-44fe-baee-a839179a9230" created="2.8.2" activeEnvironment="Default environment" name="Project 1" resourceRoot="" savePropertyValues="true" updated="3.0.0" encryptionMode="Not encrypted" compositeProjectFormat="1.3" xmlns:con="http://eviware.com/soapui/config">
   <con:settings>
     <con:setting id="0876b48c-d440-44fe-baee-a839179a9230fileName">Project-1</con:setting>
   </con:settings>

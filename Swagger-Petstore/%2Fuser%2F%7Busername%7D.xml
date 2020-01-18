@@ -73,7 +73,7 @@
         <con:authType>No Authorization</con:authType>
       </con:credentials>
       <con:parameters>
-        <entry key="username" value="" xmlns="http://eviware.com/soapui/config"/>
+        <con:entry key="username" value=""/>
       </con:parameters>
     </con:request>
   </con:method>
@@ -110,7 +110,7 @@ Updated user</con:description>
         <con:authType>No Authorization</con:authType>
       </con:credentials>
       <con:parameters>
-        <entry key="username" value="" xmlns="http://eviware.com/soapui/config"/>
+        <con:entry key="username" value=""/>
       </con:parameters>
     </con:request>
   </con:method>
@@ -147,7 +147,7 @@ Delete user</con:description>
         <con:authType>No Authorization</con:authType>
       </con:credentials>
       <con:parameters>
-        <entry key="username" value="" xmlns="http://eviware.com/soapui/config"/>
+        <con:entry key="username" value=""/>
       </con:parameters>
     </con:request>
   </con:method>

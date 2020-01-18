@@ -87,7 +87,7 @@ Find pet by ID</con:description>
         <con:authType>No Authorization</con:authType>
       </con:credentials>
       <con:parameters>
-        <entry key="petId" value="" xmlns="http://eviware.com/soapui/config"/>
+        <con:entry key="petId" value=""/>
       </con:parameters>
     </con:request>
   </con:method>

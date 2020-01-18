@@ -15,7 +15,7 @@ log.info('Hello new')</script>
   <con:testStep type="groovy" name="Groovy Script 2" id="1647c5ce-2fdd-4577-99c8-a976fc31721c">
     <con:settings/>
     <con:config>
-      <script>log.info('In another grroovy script '+context.expand('${#TestCase#x}' ))</script>
+      <script>log.info('In another grroovy script 111 '+context.expand('${#TestCase#x}' ))</script>
     </con:config>
   </con:testStep>
   <con:setupScript/>
