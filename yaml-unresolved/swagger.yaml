@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is a sample Petstore server.  You can find
+    out more about Swagger at
+    [http://swagger.io](http://swagger.io) or on
+    [irc.freenode.net, #swagger](http://swagger.io/irc/).
+  version: "1.0.0"
+  title: Swagger Petstore
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/SmartBear-CC/ChatJulia26112020/1.0.0
+  - url: 'https://petstore.swagger.io/v2'
+
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyResponseSchema'
+  
+components:
+  schemas:
+    MyResponseSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        manufacturer:  
+          type: string
+          example: "SomeManufacturer"
+        name:
+          type: string
+          nullable: true
+          example: null
