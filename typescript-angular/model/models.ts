@@ -1,7 +1,9 @@
+export * from './body';
 export * from './cSP';
 export * from './category';
 export * from './condition';
 export * from './dassanaPolicy';
+export * from './errorInfo';
 export * from './filter';
 export * from './filterOption';
 export * from './filterOptions';
@@ -9,6 +11,7 @@ export * from './filterSegment';
 export * from './filterSegments';
 export * from './filterSuggestions';
 export * from './filters';
+export * from './internalError';
 export * from './path';
 export * from './pathOperator';
 export * from './pathValue';
