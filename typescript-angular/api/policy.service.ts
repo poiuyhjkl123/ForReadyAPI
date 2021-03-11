@@ -17,14 +17,13 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { Body } from '../model/body';
 import { DassanaPolicy } from '../model/dassanaPolicy';
-import { ErrorInfo } from '../model/errorInfo';
 import { FilterOptions } from '../model/filterOptions';
 import { FilterSegment } from '../model/filterSegment';
 import { FilterSegments } from '../model/filterSegments';
 import { FilterSuggestions } from '../model/filterSuggestions';
-import { InternalError } from '../model/internalError';
+import { HttpsapiSwaggerhubComapisDassanaGlobal100componentsschemasErrorInfo } from '../model/httpsapiSwaggerhubComapisDassanaGlobal100componentsschemasErrorInfo';
+import { HttpsapiSwaggerhubComapisDassanaGlobal100componentsschemasInternalError } from '../model/httpsapiSwaggerhubComapisDassanaGlobal100componentsschemasInternalError';
 import { RuleConfig } from '../model/ruleConfig';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -83,8 +82,7 @@ export class PolicyService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            'plain/text'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -136,8 +134,7 @@ export class PolicyService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            'plain/text'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -338,10 +335,10 @@ export class PolicyService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public searchPolicy(body: Body, observe?: 'body', reportProgress?: boolean): Observable<Array<DassanaPolicy>>;
-    public searchPolicy(body: Body, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<DassanaPolicy>>>;
-    public searchPolicy(body: Body, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<DassanaPolicy>>>;
-    public searchPolicy(body: Body, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public searchPolicy(body: any, observe?: 'body', reportProgress?: boolean): Observable<Array<DassanaPolicy>>;
+    public searchPolicy(body: any, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<DassanaPolicy>>>;
+    public searchPolicy(body: any, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<DassanaPolicy>>>;
+    public searchPolicy(body: any, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling searchPolicy.');
