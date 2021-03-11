@@ -1,34 +1,398 @@
 {
   "openapi" : "3.0.0",
   "info" : {
-    "title" : "Swagger Petstore",
-    "description" : "This is a sample Petstore server.  You can find\nout more about Swagger at\n[http://swagger.io](http://swagger.io) or on\n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
-    "termsOfService" : "http://swagger.io/terms/",
+    "title" : "Alert Manager API Spec",
+    "description" : "Alert Manager API spec. This spec represents the Alert Management service whose current objective is to prioritize the alerts based upon context. \n",
     "contact" : {
-      "email" : "apiteam@swagger.io"
-    },
-    "license" : {
-      "name" : "Apache 2.0",
-      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+      "email" : "support@dassana.io"
     },
     "version" : "1.0.0"
   },
   "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/SmartBear-CC/ChatJulia26112020/1.0.0",
+    "url" : "https://virtserver.swaggerhub.com/SmartBear-CC/Julia_09032021/1.0.0",
     "description" : "SwaggerHub API Auto Mocking"
   }, {
-    "url" : "https://petstore.swagger.io/v2"
+    "url" : "https://virtserver.swaggerhub.com/SmartBear-CC/Julia_11032021/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "https://virtserver.swaggerhub.com/Dassana/AlertManager/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
   } ],
   "paths" : {
-    "/test" : {
+    "/policies/filter" : {
       "get" : {
+        "tags" : [ "policy" ],
+        "summary" : "Returns list of filter options for policies",
+        "operationId" : "getFilterOptions",
+        "parameters" : [ {
+          "name" : "teamId",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
-            "description" : "OK",
+            "description" : "List of filter options",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/MyResponseSchema"
+                  "$ref" : "#/components/schemas/FilterOptions"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ErrorInfo"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "We couldn't authenticate you",
+            "content" : {
+              "plain/text" : {
+                "schema" : {
+                  "type" : "string",
+                  "x-content-type" : "plain/text"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "An internal error has occurred",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/InternalError"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "policy" ],
+        "summary" : "Returns list of suggestions for a specific filter key and operator",
+        "operationId" : "getFilterOptionSuggestions",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/FilterSuggestions"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "List of suggestions",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FilterSegments"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ErrorInfo"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "We couldn't authenticate you",
+            "content" : {
+              "plain/text" : {
+                "schema" : {
+                  "type" : "string",
+                  "x-content-type" : "plain/text"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "An internal error has occurred",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/InternalError"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/search" : {
+      "post" : {
+        "tags" : [ "policy" ],
+        "operationId" : "searchPolicy",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "List of normalized policies matching the criteria",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/DassanaPolicy"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/{id}/rule_config" : {
+      "get" : {
+        "tags" : [ "policy" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[a-z0-9.-]*$",
+            "type" : "string"
+          }
+        }, {
+          "name" : "alertId",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "teamId",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "List of rules associated with the policy",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RuleConfig"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "policy" ],
+        "operationId" : "updatePolicyConfig",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^[a-z0-9.-]*$",
+            "type" : "string"
+          }
+        }, {
+          "name" : "alertId",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "teamId",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "name" : "test",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean",
+            "default" : true
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RuleConfig"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response is generated if the test parameter was set to false",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RuleConfig"
+                }
+              }
+            }
+          },
+          "202" : {
+            "description" : "202 response is generated if the test parameter was set to true. Note that the server will be not persist the changes in this case",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RuleConfig"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/conditions/suggestion/operators" : {
+      "get" : {
+        "tags" : [ "policy" ],
+        "description" : "returns list of available operators",
+        "operationId" : "getOperatorsForPath",
+        "parameters" : [ {
+          "name" : "path",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "alertId",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Available operators",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/FilterSegment"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/conditions /suggestion/values" : {
+      "get" : {
+        "tags" : [ "policy" ],
+        "description" : "returns list of available values",
+        "operationId" : "getValuesForPathAndOperator",
+        "parameters" : [ {
+          "name" : "path",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "operator",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "alertId",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Available values",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/FilterSegment"
+                  },
+                  "x-content-type" : "application/json"
                 }
               }
             }
@@ -39,26 +403,562 @@
   },
   "components" : {
     "schemas" : {
-      "MyResponseSchema" : {
+      "TeamId" : {
+        "type" : "string",
+        "format" : "uuid"
+      },
+      "Filters" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Filter"
+        }
+      },
+      "Filter" : {
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string",
+            "example" : "service"
+          },
+          "operator" : {
+            "type" : "string",
+            "example" : "contains"
+          },
+          "value" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "FilterOptions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/FilterOption"
+        }
+      },
+      "FilterOption" : {
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string",
+            "example" : "region"
+          },
+          "static" : {
+            "type" : "boolean",
+            "example" : true
+          },
+          "operator" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FilterSegment"
+            }
+          },
+          "values" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FilterSegment"
+            }
+          }
+        },
+        "example" : {
+          "static" : true,
+          "values" : [ null, null ],
+          "key" : "region",
+          "operator" : [ {
+            "id" : "id",
+            "value" : "value"
+          }, {
+            "id" : "id",
+            "value" : "value"
+          } ]
+        }
+      },
+      "FilterSegments" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/FilterSegment"
+        }
+      },
+      "FilterSegment" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          }
+        },
+        "example" : {
+          "id" : "id",
+          "value" : "value"
+        }
+      },
+      "FilterSuggestions" : {
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string",
+            "example" : "region"
+          },
+          "operator" : {
+            "type" : "string",
+            "example" : "contains"
+          },
+          "search" : {
+            "type" : "string",
+            "example" : "us-"
+          },
+          "teamId" : {
+            "$ref" : "#/components/schemas/TeamId"
+          },
+          "filters" : {
+            "$ref" : "#/components/schemas/Filters"
+          }
+        }
+      },
+      "DassanaPolicy" : {
+        "required" : [ "category", "csp", "id", "service", "subCategory", "vendors" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^[a-z0-9.-]*$",
+            "type" : "string",
+            "example" : "security-group-allows-ssh-connections-from-internet"
+          },
+          "csp" : {
+            "$ref" : "#/components/schemas/CSP"
+          },
+          "service" : {
+            "$ref" : "#/components/schemas/Service"
+          },
+          "resourceType" : {
+            "$ref" : "#/components/schemas/ResourceType"
+          },
+          "category" : {
+            "$ref" : "#/components/schemas/Category"
+          },
+          "subCategory" : {
+            "$ref" : "#/components/schemas/Sub-category"
+          },
+          "vendors" : {
+            "$ref" : "#/components/schemas/Vendors"
+          },
+          "defaultRiskRank" : {
+            "$ref" : "#/components/schemas/RiskRank"
+          },
+          "alertDetails" : {
+            "type" : "object",
+            "description" : "this object is available only if alertId was provided"
+          }
+        },
+        "example" : {
+          "csp" : {
+            "name" : "AWS",
+            "id" : "aws"
+          },
+          "subCategory" : {
+            "parent" : null,
+            "name" : "Firewall",
+            "id" : "firewall"
+          },
+          "service" : {
+            "csp" : null,
+            "name" : "S3",
+            "id" : "s3"
+          },
+          "defaultRiskRank" : "critical",
+          "id" : "security-group-allows-ssh-connections-from-internet",
+          "category" : {
+            "name" : "Network",
+            "id" : "network"
+          },
+          "vendors" : [ {
+            "imageUrl" : "https://images.dassana.cloud/static/security-hub.png",
+            "name" : "Security Hub",
+            "id" : "aws-security-hub"
+          }, {
+            "imageUrl" : "https://images.dassana.cloud/static/security-hub.png",
+            "name" : "Security Hub",
+            "id" : "aws-security-hub"
+          } ],
+          "alertDetails" : { },
+          "resourceType" : {
+            "csp" : null,
+            "name" : "S3 Bucket",
+            "id" : "Bucket"
+          }
+        }
+      },
+      "CSP" : {
+        "required" : [ "id" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^[a-z0-9.-]*$",
+            "type" : "string",
+            "example" : "aws"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "AWS"
+          }
+        },
+        "example" : {
+          "name" : "AWS",
+          "id" : "aws"
+        }
+      },
+      "Service" : {
+        "required" : [ "id" ],
         "type" : "object",
         "properties" : {
           "id" : {
             "type" : "string",
-            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-          },
-          "manufacturer" : {
-            "type" : "string",
-            "example" : "SomeManufacturer"
+            "example" : "s3"
           },
           "name" : {
             "type" : "string",
-            "nullable" : true
+            "example" : "S3"
+          },
+          "csp" : {
+            "$ref" : "#/components/schemas/CSP"
           }
         },
         "example" : {
-          "name" : "name",
-          "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-          "manufacturer" : "SomeManufacturer"
+          "csp" : null,
+          "name" : "S3",
+          "id" : "s3"
+        }
+      },
+      "ResourceType" : {
+        "required" : [ "id" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "example" : "Bucket"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "S3 Bucket"
+          },
+          "csp" : {
+            "$ref" : "#/components/schemas/CSP"
+          }
+        },
+        "example" : {
+          "csp" : null,
+          "name" : "S3 Bucket",
+          "id" : "Bucket"
+        }
+      },
+      "Category" : {
+        "required" : [ "id" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^[a-z0-9.-]*$",
+            "type" : "string",
+            "example" : "network"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Network"
+          }
+        },
+        "example" : {
+          "name" : "Network",
+          "id" : "network"
+        }
+      },
+      "Sub-category" : {
+        "required" : [ "id" ],
+        "type" : "object",
+        "properties" : {
+          "parent" : {
+            "$ref" : "#/components/schemas/Category"
+          },
+          "id" : {
+            "pattern" : "^[a-z0-9.-]*$",
+            "type" : "string",
+            "example" : "firewall"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Firewall"
+          }
+        },
+        "example" : {
+          "parent" : null,
+          "name" : "Firewall",
+          "id" : "firewall"
+        }
+      },
+      "Vendor" : {
+        "required" : [ "id" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^[a-z0-9.-]*$",
+            "type" : "string",
+            "example" : "aws-security-hub"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Security Hub"
+          },
+          "imageUrl" : {
+            "type" : "string",
+            "example" : "https://images.dassana.cloud/static/security-hub.png"
+          }
+        },
+        "example" : {
+          "imageUrl" : "https://images.dassana.cloud/static/security-hub.png",
+          "name" : "Security Hub",
+          "id" : "aws-security-hub"
+        }
+      },
+      "Vendors" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Vendor"
+        }
+      },
+      "Path" : {
+        "required" : [ "id", "value" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^[a-z0-9.-]*$",
+            "type" : "string",
+            "example" : "region"
+          },
+          "value" : {
+            "type" : "string",
+            "example" : "$.region"
+          }
+        },
+        "example" : {
+          "id" : "region",
+          "value" : "$.region"
+        }
+      },
+      "PathOperator" : {
+        "pattern" : "^[a-z0-9.-]*$",
+        "type" : "string",
+        "example" : "startsWith"
+      },
+      "PathValue" : {
+        "type" : "string",
+        "example" : "us-east"
+      },
+      "RuleConfig" : {
+        "type" : "object",
+        "properties" : {
+          "rules" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Rule"
+            }
+          },
+          "defaultRiskRank" : {
+            "$ref" : "#/components/schemas/RiskRank"
+          }
+        },
+        "example" : {
+          "defaultRiskRank" : null,
+          "rules" : [ {
+            "riskRank" : "critical",
+            "name" : "s3 buckets with websites are expected to be public",
+            "matched" : false,
+            "id" : "id",
+            "conditions" : [ {
+              "path" : {
+                "id" : "region",
+                "value" : "$.region"
+              },
+              "observedValue" : "us-west-1",
+              "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+              "value" : "us-east",
+              "operator" : "startsWith"
+            }, {
+              "path" : {
+                "id" : "region",
+                "value" : "$.region"
+              },
+              "observedValue" : "us-west-1",
+              "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+              "value" : "us-east",
+              "operator" : "startsWith"
+            } ],
+            "operator" : "and"
+          }, {
+            "riskRank" : "critical",
+            "name" : "s3 buckets with websites are expected to be public",
+            "matched" : false,
+            "id" : "id",
+            "conditions" : [ {
+              "path" : {
+                "id" : "region",
+                "value" : "$.region"
+              },
+              "observedValue" : "us-west-1",
+              "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+              "value" : "us-east",
+              "operator" : "startsWith"
+            }, {
+              "path" : {
+                "id" : "region",
+                "value" : "$.region"
+              },
+              "observedValue" : "us-west-1",
+              "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+              "value" : "us-east",
+              "operator" : "startsWith"
+            } ],
+            "operator" : "and"
+          } ]
+        }
+      },
+      "Rule" : {
+        "required" : [ "conditions", "id", "operator", "risk" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "s3 buckets with websites are expected to be public"
+          },
+          "operator" : {
+            "type" : "string",
+            "enum" : [ "and", "or" ]
+          },
+          "conditions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Condition"
+            }
+          },
+          "riskRank" : {
+            "$ref" : "#/components/schemas/RiskRank"
+          },
+          "matched" : {
+            "type" : "boolean",
+            "description" : "this is set to true if the rule was matched",
+            "default" : false
+          }
+        },
+        "example" : {
+          "riskRank" : "critical",
+          "name" : "s3 buckets with websites are expected to be public",
+          "matched" : false,
+          "id" : "id",
+          "conditions" : [ {
+            "path" : {
+              "id" : "region",
+              "value" : "$.region"
+            },
+            "observedValue" : "us-west-1",
+            "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "value" : "us-east",
+            "operator" : "startsWith"
+          }, {
+            "path" : {
+              "id" : "region",
+              "value" : "$.region"
+            },
+            "observedValue" : "us-west-1",
+            "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "value" : "us-east",
+            "operator" : "startsWith"
+          } ],
+          "operator" : "and"
+        }
+      },
+      "Condition" : {
+        "required" : [ "id", "operator", "path", "value" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "path" : {
+            "$ref" : "#/components/schemas/Path"
+          },
+          "operator" : {
+            "$ref" : "#/components/schemas/PathOperator"
+          },
+          "value" : {
+            "$ref" : "#/components/schemas/PathValue"
+          },
+          "observedValue" : {
+            "type" : "string",
+            "description" : "this value is available if an alertId was provided",
+            "example" : "us-west-1"
+          }
+        },
+        "example" : {
+          "path" : {
+            "id" : "region",
+            "value" : "$.region"
+          },
+          "observedValue" : "us-west-1",
+          "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+          "value" : "us-east",
+          "operator" : "startsWith"
+        }
+      },
+      "RiskRank" : {
+        "type" : "string",
+        "enum" : [ "critical", "high", "medium", "low" ]
+      },
+      "ErrorInfo" : {
+        "required" : [ "key" ],
+        "type" : "object",
+        "properties" : {
+          "msg" : {
+            "type" : "string",
+            "example" : "Nothing lasts forever."
+          },
+          "key" : {
+            "maxLength" : 100,
+            "pattern" : "^[a-zA-Z0-9_.]*$",
+            "type" : "string",
+            "example" : "this_too_shall_pass"
+          }
+        }
+      },
+      "InternalError" : {
+        "type" : "object",
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/ErrorInfo"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "requestId" : {
+              "type" : "string",
+              "description" : "Request id as provided by the client. Please provide this id when you contact the Dassana Support.",
+              "format" : "uuid",
+              "example" : "41a15ea5-fd64-4061-b0f1-1218ba7da220"
+            }
+          }
+        } ]
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "teamId" : {
+            "$ref" : "#/components/schemas/TeamId"
+          },
+          "filters" : {
+            "$ref" : "#/components/schemas/Filters"
+          }
         }
       }
     }
