@@ -1,0 +1,6 @@
+{
+    "ReportName": "BuybackAPIExecutionReport",
+    "OutlookEmailId": "spathak@Omers.com",
+    "MailSubject": "Buyback API Automation run report!",
+    "MailBody": "Hello,<br/>Please review the automation execution results attached.<br/>Thanks,<br/>Automation Execution Engine"
+}

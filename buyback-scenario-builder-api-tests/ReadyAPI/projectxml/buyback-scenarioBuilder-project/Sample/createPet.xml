@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="ca2902bd-b5ca-44ad-b878-5d7e45902fbd" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="createPet" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config">
+      <con:settings><con:setting id="ca2902bd-b5ca-44ad-b878-5d7e45902fbdfileName">createPet</con:setting></con:settings>
+      <con:savedRecentRuns>1</con:savedRecentRuns>
+      <con:testStep type="datasource" name="Data Source" id="fe7161ad-b02f-41dc-96fd-f7fc57227074">
+        <con:settings/>
+        <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:dataSource type="Excel">
+            <con:configuration><file>${#Project#excel}</file><worksheet/><cell>A2</cell><ignoreEmpty>false</ignoreEmpty><evaluateFormulas>false</evaluateFormulas></con:configuration>
+          </con:dataSource>
+          <con:shared>true</con:shared>
+          <con:restartShared>true</con:restartShared>
+          <con:property>id</con:property>
+          <con:property>category</con:property>
+          <con:property>name</con:property>
+          <con:property>photourl</con:property>
+          <con:property>tags</con:property>
+          <con:property>status</con:property>
+          <con:restartOnRun>true</con:restartOnRun>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="REST Request" id="dae9c04b-119a-45ec-9cb6-8f98a63ae389">
+        <con:settings/>
+        <con:config service="Swagger Petstore" resourcePath="/v2/pet" methodName="addPet" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="REST Request" id="ac5c4244-0cad-4ca4-a916-48102293c686" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>http://petstore.swagger.io</con:endpoint>
+            <con:request>{\r
+  "id" : ${Data Source#id},\r
+  "category" : ${Data Source#category},\r
+  "name" : "${Data Source#name}",\r
+  "photoUrls" : [ "string" ],\r
+  "tags" : [ ${Data Source#tags} ],\r
+  "status" : "${Data Source#status}"\r
+}</con:request>
+            <con:originalUri>https://petstore.swagger.io/v2/pet</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="1167e1c2-a123-4451-abc3-d519a36ce90c" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:parameters/>
+            <con:environmentSpec>
+              <con:entry environmentId="4caa47b4-a0ee-41ad-b67c-54eedd5fab38">
+                <con:authProfile>Basic</con:authProfile>
+              </con:entry>
+            </con:environmentSpec>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:tagId>f56ed5c9-bb30-41dc-a028-7676bd4f0bb5</con:tagId>
+    </con:testCase>
