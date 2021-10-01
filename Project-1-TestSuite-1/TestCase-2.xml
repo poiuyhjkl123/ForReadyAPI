@@ -20,12 +20,7 @@
       <con:runMode>PARALLELL</con:runMode>
     </con:config>
   </con:testStep>
-  <con:testStep type="groovy" name="Groovy Script" id="8b4bcb2a-bc08-4ba6-a7bd-f4cedd6610fe">
-    <con:settings/>
-    <con:config>
-      <script>testRunner.</script>
-    </con:config>
-  </con:testStep>
+  
   <con:properties/>
   <con:reportParameters/>
 </con:testCase>
